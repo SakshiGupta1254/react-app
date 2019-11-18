@@ -1,0 +1,9 @@
+h1,button{
+  display: inline;
+}
+button{
+  margin:50px;
+}
+#live,#past{
+  display:none;
+}
