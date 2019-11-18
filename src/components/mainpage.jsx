@@ -12,81 +12,65 @@ class Mainpage extends Component {
            'View',
            'Action',            
          ],
-         rows: [{
+         live: {
+           showLiveData: false,
+           data:[{
            "name": "Test Whatsapp",
+           "id":"12",
            "region": "US",
            "createdOn": 1559807714999,
            "price": "Price info of Test Whatsapp",
            "csv": "Some CSV link for Whatsapp",
            "report": "Some report link for Whatsapp",
            "image_url":"./images/first.png" 
-         },
-         {
-           "name": "Super Jewels Quest",
+           }]
+          },
+         UpComing:{
+           showUpcomingData:true,
+           data:[{"name": "Super Jewels Quest",
+           "id":"11",
            "region": "CA, FR",
            "createdOn": 1559806715124,
            "price": "Price info of Super Jewels Quest",
            "csv": "Some CSV link for Super Jewels Quest",
            "report": "Some report link for Super Jewels Ques",
-           "image_url":"Some image url of the campaign"
+           "image_url":"Some image url of the campaign"}]
          },
-         {
-           "name": "Mole Slayer",
+         past:{
+           showPastData:false,
+           data:[{"name": "Mole Slayer",
+           "id":"10",
            "region": "FR",
            "createdOn": 1559806711124,
            "price": "Price info of Mole Slayer",
            "csv": "Some CSV link for Mole Slayer",
            "report": "Some report link for Mole Slayer",
-           "image_url":"Some image url of the campaign"
+           "image_url":"Some image url of the campaign"}]
          },
-         {
-           "name": "Mancala Mix",
-           "region": "JP",
-           "createdOn": 1559806680124,
-           "price": "Price info of Mancala Mix",
-           "csv": "Some CSV link for Mancala Mix",
-           "report": "Some report link for Mancala Mix",
-           "image_url":"Some image url of the campaign"
-         }
-       ]
+        
+       
 
     }
      
      upcomingClicked = () => {
-        document.getElementById('upcoming').style.display='block';
-        document.getElementById('past').style.display='none';
-        document.getElementById('live').style.display='none';
+       
     
      }
-     liveClicked= () => {
-        document.getElementById('upcoming').style.display='none';
-        document.getElementById('past').style.display='none';
-        document.getElementById('live').style.display='block';
-        debugger;
-     }
-     pastClicked= () => {
-        document.getElementById('upcoming').style.display='none';
-        document.getElementById('past').style.display='block';
-        document.getElementById('live').style.display='none';
-     }
-     handleDecrement= counterId => {
-        console.log("decremented",counterId);
-        
-    }
+     
      
     render() { 
         
         return (
             <div>
-                <button onClick={this.upcomingClicked}>Upcoming Campaigns</button>
-                <button onClick={this.liveClicked}>Live Campaigns</button>
-                <button onClick={this.pastClicked}>Past Campaigns</button>
+                
                 {
                   <React.Fragment>
-                  <div id="upcoming">{this.state.rows.map(rows =><Upcoming date={rows.createdOn} event={rows.Component} price={rows.price} selected={true} ondelete={this.handleDecrement}/>)}
+                  <div id="upcoming">{this.state.UpComing.data.map(data =><Upcoming key={data.id} label="Upcoming Events" date={data.createdOn}/>)}
                   </div>
-                  <div id="live"><Live/></div>
-                  <div id="past"><Past /></div></React.Fragment>
+                  <div id="live">{this.state.live.data.map(data =><Upcoming key={data.id} label="Live Events" date={data.createdOn}/>)}
+                  </div>
+                  <div id="past">{this.state.past.data.map(data =><Upcoming key={data.id} label="Past Events" date={data.createdOn}/>)}</div>
+                  </React.Fragment> 
                
                    
                 }

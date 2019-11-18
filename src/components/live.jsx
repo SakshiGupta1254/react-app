@@ -71,7 +71,9 @@ class Live extends Component {
     }
     render() { 
         
-        return ( <div>EFFXr
+        return ( 
+        <div>
+          <button onClick={this.liveClicked}>Live Campaigns</button>
             <table>
                     <thead>
                     <tr>

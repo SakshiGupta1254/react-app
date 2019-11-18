@@ -71,7 +71,9 @@ class Past extends Component {
     }
     render() { 
         
-        return ( <div>refrfr
+        return ( 
+        <div>
+          <button onClick={this.pastClicked}>Past Campaigns</button>
             <table>
                     <thead>
                     <tr>

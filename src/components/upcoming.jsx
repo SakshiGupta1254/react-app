@@ -4,16 +4,17 @@ import calendar from '../images/calendar.png';
 import file from '../images/file.png';
 import Price from '../images/Price.png';
 import stat from '../images/statistics-report.png';
-import ReactDOM from 'react-dom';
+import Calendar from 'react-calendar';
 //import '../images';
 class Upcoming extends Component {
     state = { 
-        
+        callCalendar:false
 
      }
-     handeleIncrement=() => {
-        console.log("incremented",this);
-        this.setState({count:this.state.count+1})
+     handleDate=() => {
+        this.setState({
+            callCalendar: !this.state.callCalendar,
+          });
     }
      displayDate=(date)=>{
         var event = new Date(date);
@@ -30,15 +31,14 @@ class Upcoming extends Component {
         var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);       
         return `${event.toLocaleDateString('en-EN', options)} ${parseInt(Difference_In_Days)}  ${frame}`;
      }
-    
-     handleDecrement= counterId => {
-        console.log("decremented",counterId);
-        const counters = this.state.counters.filter(c=> c.id !== counterId);
-        this.setState({counters});
-    }
+     onChange = (date) => {
+        console.log(date);
+        }
     render() { 
         
-        return ( <div>
+        return ( 
+        <div>
+            <button onClick={this.upcomingClicked}>{this.props.label}</button>
             <table>
                     <thead>
                     <tr>
@@ -49,18 +49,15 @@ class Upcoming extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {this.state.rows.map((data, i) => {
-                            return (
-                                <tr key={i}>
-                                    <td>{this.displayDate(data.createdOn)}</td>
+                        <tr>
+                                    <td>{this.displayDate(this.props.date)}</td>
                                     <td><img src={first} /></td>
-                                    <td><img src={Price}/>{data.price}</td>
+                                    <td><img src={Price}/>{this.props.price}</td>
                                     <td><img src={file} />CSV</td>
                                     <td><img src={stat} />Report</td>
-                                    <td onClick={this.handeleIncrement}><img src={calendar}/>Schedule Again</td>
-                                </tr>
-                            )
-                        })}
+                                    <td onClick={this.handleDate}>
+                                    {this.state.callCalendar ? <Calendar onChange={this.onChange()} value={new Date(this.props.date)}/>: null} <img src={calendar}/>Schedule Again</td>
+                                </tr>         
                     </tbody>
                 </table>
         </div> );
